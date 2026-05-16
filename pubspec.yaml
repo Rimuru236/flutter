@@ -88,7 +88,7 @@
 #   # For details regarding fonts from package dependencies,
 #   # see https://flutter.dev/to/font-from-package
 
-  name: task_manager
+name: task_manager
 description: Personal Task Manager — Major Flutter Exercise
 
 publish_to: 'none'
