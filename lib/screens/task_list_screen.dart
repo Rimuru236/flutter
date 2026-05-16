@@ -3,7 +3,8 @@ import '../models/task.dart';
 import '../widgets/task_card.dart';
 import 'task_detail_screen.dart';
 
-
+/// The main task list screen.
+/// Handles: displaying, adding, deleting, filtering, sorting, and searching tasks.
 class TaskListScreen extends StatefulWidget {
   const TaskListScreen({super.key});
 
@@ -12,6 +13,7 @@ class TaskListScreen extends StatefulWidget {
 }
 
 class _TaskListScreenState extends State<TaskListScreen> {
+  // ── State ────────────────────────────────────────────────────────────────
   final List<Task> _allTasks = [
     // Pre-loaded sample tasks so the app doesn't start empty
     Task(
@@ -22,7 +24,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
       dueDate: DateTime.now().add(const Duration(days: 5)),
     ),
     Task(
-      title: 'Morning Jog - 5km',
+      title: 'Morning Jog – 5km',
       description: 'Run 5 km around the campus before 7 AM.',
       category: 'Health',
       priority: 'Medium',
@@ -37,14 +39,14 @@ class _TaskListScreenState extends State<TaskListScreen> {
     ),
   ];
 
-  String _filterMode = 'All';       
-  String _sortMode = 'None';         
+  String _filterMode = 'All';        // 'All' | 'Pending' | 'Completed'
+  String _sortMode = 'None';         // 'None' | 'Date' | 'Priority'
   String _searchQuery = '';
   bool _isSearching = false;
 
   final TextEditingController _searchController = TextEditingController();
 
-  
+  // ── Computed list ─────────────────────────────────────────────────────────
   List<Task> get _filteredTasks {
     List<Task> tasks = List.from(_allTasks);
 
@@ -76,13 +78,14 @@ class _TaskListScreenState extends State<TaskListScreen> {
     return tasks;
   }
 
-
+  // ── Statistics ────────────────────────────────────────────────────────────
   int get _totalCount => _allTasks.length;
   int get _completedCount => _allTasks.where((t) => t.isCompleted).length;
   int get _pendingCount => _allTasks.where((t) => !t.isCompleted).length;
   double get _completionRate =>
       _totalCount == 0 ? 0 : _completedCount / _totalCount;
 
+  // ── Helpers ───────────────────────────────────────────────────────────────
   String _formatDate(DateTime date) {
     const months = [
       'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -91,6 +94,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
     return '${months[date.month - 1]} ${date.day}, ${date.year}';
   }
 
+  // ── Add / Edit task bottom sheet ──────────────────────────────────────────
   void _openAddTaskSheet({Task? existingTask, int? existingIndex}) {
     final titleCtrl =
         TextEditingController(text: existingTask?.title ?? '');
@@ -279,6 +283,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
     );
   }
 
+  // ── Sort picker ────────────────────────────────────────────────────────────
   void _showSortOptions() {
     showModalBottomSheet(
       context: context,
@@ -315,7 +320,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
               ),
               ListTile(
                 leading: const Icon(Icons.flag_rounded),
-                title: const Text('Priority (High -> Low)'),
+                title: const Text('Priority (High → Low)'),
                 trailing: _sortMode == 'Priority'
                     ? const Icon(Icons.check, color: Color(0xFF2D6A4F))
                     : null,
@@ -342,6 +347,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
     );
   }
 
+  // ── Clear all tasks ────────────────────────────────────────────────────────
   Future<void> _confirmClearAll() async {
     final confirmed = await showDialog<bool>(
       context: context,
@@ -374,6 +380,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
     }
   }
 
+  // ── Navigate to detail screen ─────────────────────────────────────────────
   void _openDetail(Task task) {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -393,6 +400,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
     );
   }
 
+  // ── Build ─────────────────────────────────────────────────────────────────
   @override
   Widget build(BuildContext context) {
     final List<Task> displayedTasks = _filteredTasks;
@@ -407,7 +415,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white70,
                 decoration: const InputDecoration(
-                  hintText: 'Search tasks...',
+                  hintText: 'Search tasks…',
                   hintStyle: TextStyle(color: Colors.white60),
                   border: InputBorder.none,
                   filled: false,
@@ -447,6 +455,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
 
       body: Column(
         children: [
+          // ── Statistics bar ───────────────────────────────────────────────
           Container(
             color: const Color(0xFF2D6A4F),
             padding:
@@ -491,6 +500,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
             ),
           ),
 
+          // ── Filter chips ─────────────────────────────────────────────────
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -522,6 +532,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
             ),
           ),
 
+          // ── Task list ────────────────────────────────────────────────────
           Expanded(
             child: displayedTasks.isEmpty
                 ? _EmptyState(
@@ -573,6 +584,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
         ],
       ),
 
+      // ── FAB — add new task ───────────────────────────────────────────────
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _openAddTaskSheet,
         icon: const Icon(Icons.add_rounded),
@@ -585,7 +597,9 @@ class _TaskListScreenState extends State<TaskListScreen> {
   }
 }
 
+// ── Supporting widgets ──────────────────────────────────────────────────────
 
+/// Small stat badge shown in the statistics bar.
 class _StatBadge extends StatelessWidget {
   final String label;
   final String value;
@@ -623,6 +637,7 @@ class _StatBadge extends StatelessWidget {
   }
 }
 
+/// Shown when the task list is empty — varies message based on context.
 class _EmptyState extends StatelessWidget {
   final bool isFiltered;
 
