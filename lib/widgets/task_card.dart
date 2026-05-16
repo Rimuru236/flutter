@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import '../models/task.dart';
 
-
-
+/// A styled card widget that represents a single task in the list.
+/// Shows the title (with strikethrough if completed), category icon,
+/// priority badge, due date, and completion status.
 class TaskCard extends StatelessWidget {
   final Task task;
   final VoidCallback onTap;
