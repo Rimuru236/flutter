@@ -22,7 +22,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
       dueDate: DateTime.now().add(const Duration(days: 5)),
     ),
     Task(
-      title: 'Morning Jog – 5km',
+      title: 'Morning Jog - 5km',
       description: 'Run 5 km around the campus before 7 AM.',
       category: 'Health',
       priority: 'Medium',
@@ -315,7 +315,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
               ),
               ListTile(
                 leading: const Icon(Icons.flag_rounded),
-                title: const Text('Priority (High → Low)'),
+                title: const Text('Priority (High -> Low)'),
                 trailing: _sortMode == 'Priority'
                     ? const Icon(Icons.check, color: Color(0xFF2D6A4F))
                     : null,
@@ -407,7 +407,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white70,
                 decoration: const InputDecoration(
-                  hintText: 'Search tasks…',
+                  hintText: 'Search tasks...',
                   hintStyle: TextStyle(color: Colors.white60),
                   border: InputBorder.none,
                   filled: false,

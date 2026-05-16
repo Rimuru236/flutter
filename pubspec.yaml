@@ -104,3 +104,4 @@ dependencies:
 
   # No external packages used — Flutter built-in widgets only (as required)
   cupertino_icons: ^1.0.6
+  google_fonts: ^6.2.1
