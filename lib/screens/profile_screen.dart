@@ -10,8 +10,8 @@ class ProfileScreen extends StatelessWidget {
     // Personal goals list — edit these to match the student's own goals
     const List<String> semesterGoals = [
       'Complete all Flutter assignments on time and with full understanding',
-      'Have a good GPA above  this semester across all courses',
-      'Build a good working final year project that solves real world problem',
+      'Maintain a CGPA above 3.5 this semester across all courses',
+      'Build and publish a personal Flutter project to the Play Store',
     ];
 
     return Scaffold(
@@ -41,7 +41,7 @@ class ProfileScreen extends StatelessWidget {
                       radius: 48,
                       backgroundColor: Colors.white,
                       child: Text(
-                        'AN', 
+                        'AN', // ← Replace with your own initials
                         style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.w800,
@@ -52,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     const Text(
-                      'Akere Emile Nji', 
+                      'Akere Emile Nji', // ← Replace with your real name
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
@@ -61,7 +61,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     const Text(
-                      'LMUI250681', 
+                      'LMUI250681', // ← Replace with your student ID
                       style: TextStyle(
                         fontSize: 13,
                         color: Color(0xFFB7E4C7),
@@ -85,14 +85,14 @@ class ProfileScreen extends StatelessWidget {
                     icon: Icons.school_rounded,
                     label: 'Programme',
                     value: 'BSc. Software Engineering, Level 400',
-
+                    // ↑ Replace with your programme
                   ),
                   const SizedBox(height: 12),
                   _InfoCard(
                     icon: Icons.apartment_rounded,
                     label: 'Department',
                     value: 'Computer Science & Engineering',
-                    
+                    // ↑ Replace with your department
                   ),
                   const SizedBox(height: 24),
 
@@ -114,11 +114,12 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                     child: const Text(
-                      
+                      // ↓ Replace with your own 2-3 sentence bio
                       'I am a passionate Level 400 Software Engineering student with a '
-                      'strong interest in AI and Machine Learning. I enjoy '
+                      'strong interest in mobile and full-stack development. I enjoy '
                       'solving real-world problems through clean, maintainable code. '
-                      'Outside of coding, I love exploring emerging technologies.',
+                      'Outside of coding, I love mentoring junior students and '
+                      'exploring emerging technologies.',
                       style: TextStyle(
                         fontSize: 14.5,
                         color: Color(0xFF374151),
@@ -128,7 +129,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
 
-                  
+                  // Semester goals section
                   _SectionHeader(
                       title: 'My Top 3 Goals This Semester',
                       icon: Icons.flag_rounded),
@@ -149,7 +150,7 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-
+/// A small card showing an info row with icon, label, and value.
 class _InfoCard extends StatelessWidget {
   final IconData icon;
   final String label;

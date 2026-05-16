@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../models/task.dart';
 
-
+/// Displays the full details of a single task.
+/// Supports toggling completion, deleting with a confirmation dialog,
+/// and editing (re-opens the bottom sheet pre-filled with existing data).
 class TaskDetailScreen extends StatefulWidget {
   final Task task;
   final VoidCallback onDelete;
@@ -26,6 +28,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
   @override
   void initState() {
     super.initState();
+    // Keep a local reference so UI updates reflect after toggle / edit
     _task = widget.task;
   }
 
@@ -100,7 +103,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
     }
   }
 
-  
+  /// Opens an edit bottom sheet pre-filled with the current task's data.
   void _openEditSheet() {
     // Controllers pre-filled with existing values
     final titleCtrl = TextEditingController(text: _task.title);
@@ -505,7 +508,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
   }
 }
 
-
+/// A reusable white card section used in the detail screen.
 class _DetailCard extends StatelessWidget {
   final String title;
   final IconData icon;
