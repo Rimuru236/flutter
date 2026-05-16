@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/task_list_screen.dart';
 import 'screens/profile_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const TaskManagerApp());
@@ -16,7 +15,6 @@ class TaskManagerApp extends StatelessWidget {
       title: 'Personal Task Manager',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        textTheme: GoogleFonts.robotoTextTheme(),
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF2D6A4F),
@@ -130,4 +128,3 @@ class _MainScaffoldState extends State<MainScaffold> {
     );
   }
 }
-
